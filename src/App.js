@@ -1,12 +1,21 @@
 import logo from "./logo.svg";
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import Vesuvio from "./components/Vesuvio";
+import Pizzas from "./components/Pizzas";
 import { CounterContext } from "./contexts/CounterContext";
+import { UpgradesData } from "./data/UpgradesData";
 
 function App() {
   const [pizzaCounter, setPizzaCounter] = useState(0);
-  const contextValues = {pizzaCounter, setPizzaCounter};
+  const [upgradesData, setupgradesData] = useState(UpgradesData);
+  const contextValues = {
+    pizzaCounter,
+    setPizzaCounter, 
+    upgradesData,
+    setupgradesData,
+  };
+
+ 
 
   useEffect(() => {}, [pizzaCounter]);
   return (
@@ -21,14 +30,7 @@ function App() {
         >
           Pizza
         </button>
-        <Vesuvio count={pizzaCounter} />
-        <button
-          onClick={() => {
-            setPizzaCounter(0);
-          }}
-        >
-          Reset
-        </button>
+        <Pizzas count={pizzaCounter} />
       </CounterContext.Provider>
     </div>
   );
