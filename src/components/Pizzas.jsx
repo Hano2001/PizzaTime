@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { CounterContext } from "../contexts/CounterContext";
+import { ItemDiv, UpgradeDiv } from "../styling/upgrades";
 
 export default function Pizzas({ count }) {
   const { pizzaCounter, setPizzaCounter, upgradesData, setupgradesData } =
@@ -7,27 +8,12 @@ export default function Pizzas({ count }) {
   const [upgradesValue, setUpgradesValue] = useState(0);
 
   useEffect(() => {
-    let newAmount = 0;
-    upgradesData.map((pizza, key) => {
-      newAmount += pizza.amount * pizza.generate;
-    });
-    setUpgradesValue(newAmount);
+    setUpgradesValue(upgradesData.reduce((a,b)=> a + (b.amount*b.generate),0));
   }, [upgradesData]);
   const TenSeconds_MS = 1000;
   useEffect(() => {
-    let newAmount = 0;
-    upgradesData.map((pizza, key) => {
-      newAmount += pizza.amount * pizza.generate;
-    });
-    setUpgradesValue(newAmount);
     const interval = setInterval(() => {
-      let amount = 0;
-      upgradesData.map((pizza, key) => {
-        if (pizza.amount > 0) {
-          amount += pizza.amount * pizza.generate;
-        }
-      });
-      setPizzaCounter(pizzaCounter => pizzaCounter+ amount);
+      setPizzaCounter((pizzaCounter) => pizzaCounter + upgradesData.reduce((a,b)=> a + (b.amount*b.generate),0));
     }, TenSeconds_MS);
 
     return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
@@ -42,29 +28,25 @@ export default function Pizzas({ count }) {
   }
   return (
     <div>
-      {upgradesData.map((pizza, index) => {
-        return (
-          <div>
-            <button
-              type="Submit"
-              onClick={() => ButtonClick(pizza.generate, pizza.price, index)}
-              disabled={count < pizza.price ? true : false}
-            >
-              {pizza.name}
-            </button>
-          </div>
-        );
-      })}
-      <ul>
-        {upgradesData.map((pizza, index) => {
+      <h4>Points/second: {upgradesValue}</h4>
+      <UpgradeDiv>
+        {upgradesData.map((item, index) => {
           return (
             <>
-              {pizza.name}: {pizza.amount}
-              <br />
+              <ItemDiv>
+                {item.name}: {item.amount}
+              </ItemDiv>
+              <button
+                type="Submit"
+                onClick={() => ButtonClick(item.generate, item.price, index)}
+                disabled={count < item.price ? true : false}
+              >
+                Buy({item.price})
+              </button>
             </>
           );
         })}
-      </ul>
+      </UpgradeDiv>
     </div>
   );
 }
