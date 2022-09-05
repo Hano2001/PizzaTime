@@ -1,6 +1,7 @@
 import  styled  from "styled-components";
 
 const UpgradeDiv = styled.div`
+width: 500px;
 display: grid;
 background: #bf0909;
 float: right;
@@ -14,7 +15,12 @@ background: #ff0037;
 padding: 5px;
 height: 25px;
 margin: 15px;
-width: fit-content;
+width: 50%;
 text-align: center;
+button{
+    float: left;
+    width: 25%;
+    height: 100%;
+    }
 `
 export{UpgradeDiv, ItemDiv};
