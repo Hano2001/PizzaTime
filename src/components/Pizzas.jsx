@@ -15,7 +15,7 @@ export default function Pizzas({ count }) {
     );
   }, [generateData]);
 
-  const TenSeconds_MS = 1000;
+  const oneSecond_MS = 1000;
   useEffect(() => {
     const interval = setInterval(() => {
       setPizzaCounter(
@@ -23,18 +23,18 @@ export default function Pizzas({ count }) {
           pizzaCounter +
           generateData.reduce((a, b) => a + b.amount * b.generate, 0)
       );
-    }, TenSeconds_MS);
+    }, oneSecond_MS);
 
     return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
   }, [generateData]);
 
   function ButtonClick(generate, price, index) {
     setPizzaCounter((pizzaCounter) => pizzaCounter - price);
-    let pizzaArray = [...generateData];
-    pizzaArray[index].amount += 1;
-    pizzaArray[index].price += Math.round(pizzaArray[index].price * 0.5);
+    let generateArray = [...generateData];
+    generateArray[index].amount += 1;
+    generateArray[index].price += Math.round(generateArray[index].price * 0.5);
 
-    setGenerateData(pizzaArray);
+    setGenerateData(generateArray);
   }
 
   function gameReset() {
