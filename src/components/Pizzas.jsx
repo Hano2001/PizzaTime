@@ -1,19 +1,19 @@
 import React, { useContext, useState, useEffect } from "react";
 import { CounterContext } from "../contexts/CounterContext";
-import { ItemDiv, UpgradeDiv } from "../styling/upgrades";
-import { Button } from "../styling/general";
-import { resetData } from "../data/UpgradesData";
+import { ItemDiv, GenerationPropsDiv } from "../styling/generationStyling";
+import { Button } from "../styling/generalStyling";
+import { resetData } from "../data/generationData";
 
 export default function Pizzas({ count }) {
-  const { pizzaCounter, setPizzaCounter, upgradesData, setupgradesData } =
+  const { pizzaCounter, setPizzaCounter, generateData, setGenerateData } =
     useContext(CounterContext);
   const [upgradesValue, setUpgradesValue] = useState(0);
 
   useEffect(() => {
     setUpgradesValue(
-      upgradesData.reduce((a, b) => a + b.amount * b.generate, 0)
+      generateData.reduce((a, b) => a + b.amount * b.generate, 0)
     );
-  }, [upgradesData]);
+  }, [generateData]);
 
   const TenSeconds_MS = 1000;
   useEffect(() => {
@@ -21,24 +21,24 @@ export default function Pizzas({ count }) {
       setPizzaCounter(
         (pizzaCounter) =>
           pizzaCounter +
-          upgradesData.reduce((a, b) => a + b.amount * b.generate, 0)
+          generateData.reduce((a, b) => a + b.amount * b.generate, 0)
       );
     }, TenSeconds_MS);
 
     return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
-  }, [upgradesData]);
+  }, [generateData]);
 
   function ButtonClick(generate, price, index) {
     setPizzaCounter((pizzaCounter) => pizzaCounter - price);
-    let pizzaArray = [...upgradesData];
+    let pizzaArray = [...generateData];
     pizzaArray[index].amount += 1;
     pizzaArray[index].price += Math.round(pizzaArray[index].price * 0.5);
 
-    setupgradesData(pizzaArray);
+    setGenerateData(pizzaArray);
   }
 
   function gameReset() {
-    upgradesData.map((item, index) => {
+    generateData.map((item, index) => {
       item.amount = 0;
       item.price = resetData[index].price;
       return item;
@@ -49,14 +49,14 @@ export default function Pizzas({ count }) {
   return (
     <div>
       <h4>Points/second: {upgradesValue}</h4>
-      <UpgradeDiv>
-        {upgradesData.map((item, index) => {
+      <GenerationPropsDiv>
+        {generateData.map((item, index) => {
           return (
             <>
               <ItemDiv>
                 {item.name}: {item.amount}
                 <Button
-                  function="upgrade"
+                  function="buy"
                   type="Submit"
                   onClick={() => ButtonClick(item.generate, item.price, index)}
                   disabled={count < item.price ? true : false}
@@ -67,8 +67,7 @@ export default function Pizzas({ count }) {
             </>
           );
         })}
-      </UpgradeDiv>
-      <button onClick={() => console.log(resetData)}>test</button>
+      </GenerationPropsDiv>
       <Button function="reset" onClick={gameReset}>
         RESET GAME
       </Button>

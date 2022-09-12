@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
 import Pizzas from "./components/Pizzas";
+import Upgrades from "./components/Upgrades";
 import { CounterContext } from "./contexts/CounterContext";
-import { UpgradesData} from "./data/UpgradesData";
-import { Button } from "./styling/general";
+import { generationData} from "./data/generationData";
+import { Button, Footer, MainDiv } from "./styling/generalStyling";
 function App() {
   const [pizzaCounter, setPizzaCounter] = useState(0);
-  const [upgradesData, setupgradesData] = useState(UpgradesData);
+  const [generateData, setGenerateData] = useState(generationData);
   const contextValues = {
     pizzaCounter,
     setPizzaCounter, 
-    upgradesData,
-    setupgradesData,
+    generateData,
+    setGenerateData,
   };
 
 
   useEffect(() => {}, [pizzaCounter]);
   return (
-    <div className="App">
+    <MainDiv>
       <CounterContext.Provider value={contextValues}>
         <h1>PIZZA TIME</h1>
+        
         <h2>{pizzaCounter}</h2>
         <Button
           function="clicker"
@@ -30,8 +31,12 @@ function App() {
           Pizza
         </Button>
         <Pizzas count={pizzaCounter} />
+        <Upgrades/>
       </CounterContext.Provider>
-    </div>
+      <Footer>
+      <a href="https://github.com/Hano2001" target="_blank">The creators GitHub</a>
+      </Footer>
+    </MainDiv>
   );
 }
 

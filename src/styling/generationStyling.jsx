@@ -1,6 +1,6 @@
 import  styled  from "styled-components";
 
-const UpgradeDiv = styled.div`
+const GenerationPropsDiv = styled.div`
 width: 500px;
 display: grid;
 background: #bf0909;
@@ -23,4 +23,4 @@ button{
     height: 100%;
     }
 `
-export{UpgradeDiv, ItemDiv};
+export{GenerationPropsDiv, ItemDiv};
