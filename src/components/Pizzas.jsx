@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { CounterContext } from "../contexts/CounterContext";
-import { ItemDiv, GenerationPropsDiv } from "../styling/generationStyling";
+import { ItemContainer, GenerationMainContainer } from "../styling/generationStyling";
 import { Button } from "../styling/generalStyling";
 import { resetData } from "../data/generationData";
 
@@ -49,11 +49,11 @@ export default function Pizzas({ count }) {
   return (
     <div>
       <h4>Points/second: {upgradesValue}</h4>
-      <GenerationPropsDiv>
+      <GenerationMainContainer>
         {generateData.map((item, index) => {
           return (
             <>
-              <ItemDiv>
+              <ItemContainer>
                 {item.name}: {item.amount}
                 <Button
                   function="buy"
@@ -63,11 +63,11 @@ export default function Pizzas({ count }) {
                 >
                   Buy({item.price})
                 </Button>
-              </ItemDiv>
+              </ItemContainer>
             </>
           );
         })}
-      </GenerationPropsDiv>
+      </GenerationMainContainer>
       <Button function="reset" onClick={gameReset}>
         RESET GAME
       </Button>

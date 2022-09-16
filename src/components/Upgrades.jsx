@@ -6,7 +6,7 @@ import { Button } from "../styling/generalStyling";
 import {
   UpgradeInfoDiv,
   UpgradeMainDiv,
-  UpgradesDiv,
+  UpgradesContainer,
 } from "../styling/upgradesStyling";
 export default function Upgrades() {
   const { generateData, setGenerateData } = useContext(CounterContext);
@@ -21,7 +21,7 @@ export default function Upgrades() {
   return (
     <>
       <UpgradeMainDiv>
-        <UpgradesDiv>
+        <UpgradesContainer>
           <h2>Upgrades</h2>
           {upgradesData_Generation.filter(upgrade => upgrade.purchased === false).map((item, arrayIndex) => {
             return (
@@ -42,7 +42,7 @@ export default function Upgrades() {
               </>
             );
           })}
-        </UpgradesDiv>
+        </UpgradesContainer>
         <button onClick={() => console.log(upgradesData_Generation)}>TEST</button>
         <UpgradeInfoDiv>
           <strong>{upgradeInfo}</strong>

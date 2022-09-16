@@ -1,6 +1,6 @@
 import  styled  from "styled-components";
 
-const GenerationPropsDiv = styled.div`
+const GenerationMainContainer = styled.div`
 width: 500px;
 display: grid;
 background: #bf0909;
@@ -8,7 +8,7 @@ float: right;
 border-radius: 8px;
 border: solid #faff6c 10px;
 `
-const ItemDiv = styled.div`
+const ItemContainer = styled.div`
 font-family: Arial, Helvetica, sans-serif;
 color: white;
 background: #ff0037;
@@ -23,4 +23,4 @@ button{
     height: 100%;
     }
 `
-export{GenerationPropsDiv, ItemDiv};
+export{GenerationMainContainer, ItemContainer};

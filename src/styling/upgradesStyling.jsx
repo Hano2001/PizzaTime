@@ -4,7 +4,7 @@ position: absolute;
 z-index: 1;
 float: left;
 `
-const UpgradesDiv = styled.div`
+const UpgradesContainer = styled.div`
 
 width: 250px;
 height: fit-content;
@@ -22,4 +22,4 @@ height: fit-content ;
 bottom: 25%;
 text-align: center;
 `
-export{UpgradesDiv, UpgradeInfoDiv,UpgradeMainDiv};
+export{UpgradesContainer, UpgradeInfoDiv,UpgradeMainDiv};
