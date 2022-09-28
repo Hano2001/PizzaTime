@@ -45,6 +45,19 @@ width: 100%;
 position: absolute;
 bottom: 0%;
 height: 45px;
-background-color: black
+background-color: black;
 `
-export { Button,MainDiv,Footer };
+const Counter = styled.div`
+height: 150px;
+background: salmon;
+width: 150px;
+`
+
+const Container = styled.div`
+margin: 20px;
+display: flex;
+flex-direction: row;
+justify-content: space-between ;
+
+`
+export { Button,MainDiv,Footer,Counter,Container };
