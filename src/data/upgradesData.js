@@ -6,6 +6,7 @@ export const upgradesData_Generation = [
     description:
       "Send your all your Chefs on this culinary cooking class! This will make your chefs twice as efficient! (Require at least ten chefs",
     purchased: false,
+    price:10
   },
   {
     name: "Car tune up",
@@ -13,7 +14,8 @@ export const upgradesData_Generation = [
     index: 1,
     description:
       "Watch out! your delivery drivers just got a tune up on their cars! They can now deliver your pizzas twice as fast!",
-      purchased: false
+      purchased: false,
+      price: 10,
   },
   {
     name: "Tv Ad",
@@ -21,7 +23,8 @@ export const upgradesData_Generation = [
     index: 2,
     description:
       "Invest in a commercial at your local Tv-station, this will bring more hungry customers and your restaurant will sell twice as much! (Requriement: Bigger Restaurant lvl 5)",
-      purchased: false
+      purchased: false,
+      price: 5,
   },
 ];
 

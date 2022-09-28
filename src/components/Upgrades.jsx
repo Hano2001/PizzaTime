@@ -62,7 +62,7 @@ export default function Upgrades() {
                   </p>
                   <Button
                     onClick={() => upgradePurchase(item.index, item.id)}
-                    // disabled={ge < item.price ? true : false}
+                    disabled={generateData[item.index].amount < item.price ? true : false}
                     function="upgrade"
                   >
                     Buy Upgrade

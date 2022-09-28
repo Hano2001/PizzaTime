@@ -74,6 +74,7 @@ export default function Pizzas({ count }) {
       <Button function="reset" onClick={gameReset}>
         RESET GAME
       </Button>
+      <button onClick={() => setPizzaCounter(pizzaCounter => pizzaCounter + 10000)}>10,000 Pizzas (Cowabunga)</button>
     </div>
   );
 }
