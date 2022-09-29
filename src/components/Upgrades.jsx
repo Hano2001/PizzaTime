@@ -1,79 +1,48 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
-import { useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { CounterContext } from "../contexts/CounterContext";
 import { upgradesData_Generation } from "../data/upgradesData";
-import { Button } from "../styling/generalStyling";
 import {
-  UpgradeInfoContainer,
-  UpgradeItem,
   UpgradeMainContainer,
   UpgradesContainer,
 } from "../styling/upgradesStyling";
+import UpgradesPurchased from "./UpgradesPurchased";
+import UpgradeStore from "./UpgradeStore";
 export default function Upgrades() {
-  const { generateData, setGenerateData } = useContext(CounterContext);
-  const [upgradeInfo, setUpgradeInfo] = useState("");
-  const [generationUpgrades, setGenerationUpgrades] = useState(
-    upgradesData_Generation
-  );
+  const { generationUpgrades } = useContext(CounterContext);
+  const [listOption, setListOption] = useState(true);
   const [upgradeStoreList, setUpgradeStoreList] = useState(
     generationUpgrades.filter((upgrade) => upgrade.purchased === false)
+  );
+  const [purchased, setPurchased] = useState(
+    generationUpgrades.filter((upgrade) => upgrade.purchased === true)
   );
 
   useEffect(() => {
     setUpgradeStoreList(
       upgradesData_Generation.filter((upgrade) => upgrade.purchased === false)
     );
+    setPurchased(
+      upgradesData_Generation.filter((upgrade) => upgrade.purchased === true)
+    );
   }, [generationUpgrades]);
+  function ReturnList() {
+    return listOption ? (
+      <UpgradeStore list={upgradeStoreList} />
+    ) : (
+      <UpgradesPurchased list={purchased} />
+    );
+  }
 
-  function upgradePurchase(generateIndex, upgradeId) {
-    let upgradesArray = [...generationUpgrades];
-    upgradesArray[upgradeId].purchased = true;
-    generateData[generateIndex].generate =
-      generateData[generateIndex].generate * 2;
-    setGenerationUpgrades(upgradesArray);
-  }
-  if(upgradeStoreList.length === 0){
-    return (
-        <>
-        <UpgradeMainContainer>
-            <UpgradesContainer>
-                <h2>Upgrades</h2>
-                <strong>You bought all upgrades! Yaaay!</strong>
-            </UpgradesContainer>
-        </UpgradeMainContainer>
-        </>
-    )
-  }
   return (
     <>
       <UpgradeMainContainer>
         <UpgradesContainer>
           <h2>Upgrades</h2>
-          {upgradeStoreList.map((item) => {
-            return (
-              <div key={item.id}>
-                <UpgradeItem>
-                  <p
-                    onMouseOver={() => setUpgradeInfo(item.description)}
-                    onMouseLeave={() => setUpgradeInfo("")}
-                  >
-                    {item.name}
-                  </p>
-                  <Button
-                    onClick={() => upgradePurchase(item.index, item.id)}
-                    disabled={generateData[item.index].amount < item.price ? true : false}
-                    function="upgrade"
-                  >
-                    Buy Upgrade
-                  </Button>
-                </UpgradeItem>
-              </div>
-            );
-          })}
-          <UpgradeInfoContainer>
-            <strong>{upgradeInfo}</strong>
-          </UpgradeInfoContainer>
+          <button onClick={() => setListOption(true)}>Store</button>
+          <button onClick={() => setListOption(false)}>Purchased</button>
+          {/* <UpgradeStore list={upgradeStoreList} />
+          <UpgradesPurchased list={purchased} /> */}
+          <ReturnList/>
         </UpgradesContainer>
       </UpgradeMainContainer>
     </>

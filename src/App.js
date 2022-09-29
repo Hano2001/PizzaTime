@@ -3,16 +3,20 @@ import Pizzas from "./components/Pizzas";
 import Upgrades from "./components/Upgrades";
 import { CounterContext } from "./contexts/CounterContext";
 import { generationData } from "./data/generationData";
+import { upgradesData_Generation } from "./data/upgradesData";
 import { Button, Counter, Footer, MainDiv,Container } from "./styling/generalStyling";
 
 function App() {
   const [pizzaCounter, setPizzaCounter] = useState(0);
   const [generateData, setGenerateData] = useState(generationData);
+  const [generationUpgrades,setGenerationUpgrades] = useState(upgradesData_Generation)
   const contextValues = {
     pizzaCounter,
     setPizzaCounter,
     generateData,
     setGenerateData,
+    generationUpgrades,
+    setGenerationUpgrades,
   };
 
   useEffect(() => {}, [pizzaCounter]);
