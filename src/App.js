@@ -5,11 +5,13 @@ import { CounterContext } from "./contexts/CounterContext";
 import { generationData } from "./data/generationData";
 import { upgradesData_Generation } from "./data/upgradesData";
 import { Button, Counter, Footer, MainDiv,Container } from "./styling/generalStyling";
+import clickerImage from './images/pizza_click.jpeg'
 
 function App() {
   const [pizzaCounter, setPizzaCounter] = useState(0);
   const [generateData, setGenerateData] = useState(generationData);
   const [generationUpgrades,setGenerationUpgrades] = useState(upgradesData_Generation)
+  const [click , setClick ] = useState(false);
   const contextValues = {
     pizzaCounter,
     setPizzaCounter,
@@ -18,6 +20,10 @@ function App() {
     generationUpgrades,
     setGenerationUpgrades,
   };
+  const animate = () => {
+    setClick(true);
+    setTimeout(() => setClick(false), 100);
+  }
 
   useEffect(() => {}, [pizzaCounter]);
   return (
@@ -28,14 +34,18 @@ function App() {
         <Upgrades />
         <Counter>
           <h2>{pizzaCounter}</h2>
-          <Button
+          <img src={clickerImage} height={click ? "120" : "100"}  onClick={() => {
+              animate();
+              setPizzaCounter(pizzaCounter + 1);
+            }}></img>
+          {/* <Button
             function="clicker"
             onClick={() => {
               setPizzaCounter(pizzaCounter + 1);
             }}
           >
             Pizza
-          </Button>
+          </Button> */}
         </Counter>
         <Pizzas count={pizzaCounter} />
 

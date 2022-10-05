@@ -27,7 +27,6 @@ position: fixed;
 width: 100%;
 height: 100%;
 bottom: 0%;
-background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(249,79,233,1) 35%);
 z-index: -1;
 `
 const Footer = styled.footer`
@@ -48,16 +47,20 @@ height: 45px;
 background-color: black;
 `
 const Counter = styled.div`
-height: 150px;
-background: salmon;
-width: 150px;
+text-align: center;
 `
 
 const Container = styled.div`
 margin: 20px;
 display: flex;
 flex-direction: row;
-justify-content: space-between ;
+justify-content: space-between;
+@media (max-width:1000px) {
+  flex-direction:column;
+  align-items: center;
+  justify-content: space-around;
+  
+}
 
 `
 export { Button,MainDiv,Footer,Counter,Container };

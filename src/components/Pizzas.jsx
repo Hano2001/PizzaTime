@@ -3,6 +3,7 @@ import { CounterContext } from "../contexts/CounterContext";
 import {
   ItemContainer,
   GenerationMainContainer,
+  GenerationImage,
 } from "../styling/generationStyling";
 import { Button } from "../styling/generalStyling";
 import { resetData } from "../data/generationData";
@@ -56,7 +57,6 @@ export default function Pizzas({ count }) {
           return (
             <div key={item.id}>
               <ItemContainer>
-                {item.name}: {item.amount}
                 <Button
                   function="buy"
                   type="Submit"
@@ -65,6 +65,8 @@ export default function Pizzas({ count }) {
                 >
                   Buy({item.price})
                 </Button>
+                {item.name}: {item.amount}
+                <GenerationImage src={require("../images/" + item.imgSrc)} />
               </ItemContainer>
             </div>
           );
@@ -74,7 +76,11 @@ export default function Pizzas({ count }) {
       <Button function="reset" onClick={gameReset}>
         RESET GAME
       </Button>
-      <button onClick={() => setPizzaCounter(pizzaCounter => pizzaCounter + 10000)}>10,000 Pizzas (Cowabunga)</button>
+      <button
+        onClick={() => setPizzaCounter((pizzaCounter) => pizzaCounter + 10000)}
+      >
+        10,000 Pizzas (Cowabunga)
+      </button>
     </div>
   );
 }

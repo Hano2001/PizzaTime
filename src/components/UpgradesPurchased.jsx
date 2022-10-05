@@ -2,7 +2,8 @@ import React from "react";
 import { UpgradeItem } from "../styling/upgradesStyling";
 
 export default function UpgradesPurchased({list}) {
-  return (
+    if(list) {
+        return (
     <>
       {list.map((item) => {
         return (
@@ -15,4 +16,9 @@ export default function UpgradesPurchased({list}) {
       })}
     </>
   );
+    }
+    else {
+        <h3>See all your purchased upgrades here!</h3>
+    }
+  
 }

@@ -3,6 +3,7 @@ const UpgradeMainContainer = styled.div`
   z-index: 1;
   background: red;
   border-radius: 3px;
+  width: fit-content;
 `;
 const UpgradesContainer = styled.div`
   width: 250px;

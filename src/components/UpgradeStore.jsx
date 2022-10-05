@@ -1,10 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { CounterContext } from "../contexts/CounterContext";
 import { Button } from "../styling/generalStyling";
-import {
-  UpgradeInfoContainer,
-  UpgradeItem,
-} from "../styling/upgradesStyling";
+import { UpgradeInfoContainer, UpgradeItem } from "../styling/upgradesStyling";
 export default function UpgradeStore({ list }) {
   const {
     generateData,
@@ -17,48 +14,48 @@ export default function UpgradeStore({ list }) {
   function upgradePurchase(generateIndex, upgradeId) {
     let upgradesArray = [...generationUpgrades];
     upgradesArray[upgradeId].purchased = true;
-    generateData[generateIndex].generate =
-      generateData[generateIndex].generate * 2;
+    let newGenerate = [...generateData];
+    newGenerate[generateIndex].generate =
+      newGenerate[generateIndex].generate * 2;
+    setGenerateData(newGenerate);
     setGenerationUpgrades(upgradesArray);
   }
 
   if (list.length === 0) {
     return (
       <>
-            <strong>You bought all upgrades! Yaaay!</strong>
+        <strong>You bought all upgrades! Yaaay!</strong>
       </>
     );
   }
   return (
     <>
-          {list.map((item) => {
-            return (
-              <div key={item.id}>
-                <UpgradeItem>
-                  <p
-                    onMouseOver={() => setUpgradeInfo(item.description)}
-                    onMouseLeave={() => setUpgradeInfo("")}
-                  >
-                    {item.name}
-                  </p>
-                  <Button
-                    onClick={() => upgradePurchase(item.index, item.id)}
-                    disabled={
-                      generateData[item.index].amount < item.price
-                        ? true
-                        : false
-                    }
-                    function="upgrade"
-                  >
-                    Buy Upgrade
-                  </Button>
-                </UpgradeItem>
-              </div>
-            );
-          })}
-          <UpgradeInfoContainer>
-            <strong>{upgradeInfo}</strong>
-          </UpgradeInfoContainer>
+      {list.map((item) => {
+        return (
+          <div key={item.id}>
+            <UpgradeItem>
+              <p
+                onMouseOver={() => setUpgradeInfo(item.description)}
+                onMouseLeave={() => setUpgradeInfo("")}
+              >
+                {item.name}
+              </p>
+              <Button
+                onClick={() => upgradePurchase(item.index, item.id)}
+                disabled={
+                  generateData[item.index].amount < item.price ? true : false
+                }
+                function="upgrade"
+              >
+                Buy Upgrade
+              </Button>
+            </UpgradeItem>
+          </div>
+        );
+      })}
+      <UpgradeInfoContainer>
+        <strong>{upgradeInfo}</strong>
+      </UpgradeInfoContainer>
     </>
   );
 }
